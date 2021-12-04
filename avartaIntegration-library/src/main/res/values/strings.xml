@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">IntegrationLibrary</string>
+
+    <string name="error_server_unknown">Sorry. Server response error!</string>
+
+    <!--api errors-->
+    <string-array name="api_errors">
+        <item>Organisation Record Not Found</item>
+        <item>User Record Not Found</item>
+        <item>User Not Associated To Organisation</item>
+        <item>Workflow Not Associated With Organisation</item>
+        <item>Platform Workflow Instance Not Found</item>
+        <item>Platform Workflow Instance Not Complete</item>
+        <item>Invalid Platform Activity Type</item>
+        <item>No Workflows Found For Organisation</item>
+        <item>Missing Organisation Header</item>
+        <item>Attempt to Launch Secondary Workflow</item>
+        <item>The user account is locked</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>User not enrolled</item>
+        <item>User already enrolled</item>
+    </string-array>
+
+</resources>

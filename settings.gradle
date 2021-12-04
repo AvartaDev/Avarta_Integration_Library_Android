@@ -1,0 +1,1 @@
+include ':avartaIntegration-library', ':test-library'

@@ -1,0 +1,95 @@
+apply plugin: 'com.android.library'
+apply plugin: "com.bugsnag.android.gradle"
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "com.bugsnag:bugsnag-android-gradle-plugin:5.7.8"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 31
+        versionCode 4
+        versionName "4.1"
+        archivesBaseName = "avartaIntegrationLibrary"
+        version = android.defaultConfig.versionName
+        useLibrary 'org.apache.http.legacy'
+    }
+//    publishNonDefault true
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    /*  flavorDimensions "version"
+      productFlavors {
+          viper {
+              dimension "version"
+          }
+          production {
+              dimension "version"
+          }
+      }*/
+
+    sourceSets.main.jni.srcDirs = []
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    task ndkBuild(type: Exec) {
+        def ndkDir = android.ndkDirectory.getAbsolutePath()
+
+        commandLine ndkDir + '\\ndk-build.cmd'
+    }
+
+    task ndkClean(type: Exec) {
+        def ndkDir = android.ndkDirectory.getAbsolutePath()
+
+        commandLine ndkDir + '\\ndk-build.cmd', 'clean'
+    }
+
+    clean.dependsOn 'ndkClean'
+
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFileName
+            if (outputFile != null && outputFile.endsWith('.aar')) {
+                def fileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
+                //  outputFileName = new File(outputFile.parent, fileName)
+                outputFile = new File(
+                        "./../../../../../build/",
+                        fileName)
+            }
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //implementation 'com.google.firebase:firebase-crashlytics:18.0.1'
+    implementation "com.bugsnag:bugsnag-android:5.11.0"
+}

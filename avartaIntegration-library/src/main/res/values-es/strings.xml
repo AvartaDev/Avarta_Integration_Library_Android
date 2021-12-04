@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="api_errors">
+        <item>Registro de organización no encontrado</item>
+        <item>Registro de usuario no encontrado</item>
+        <item>Usuario no asociado a la organización</item>
+        <item>Workflow no asociado con la organización</item>
+        <item>Workflow de plataforma no encontrada</item>
+        <item>Workflow de plataforma no completa</item>
+        <item>Tipo de actividad de plataforma inválida</item>
+        <item>No se encontraron workflows para la organización</item>
+        <item>Encabezado de organización en falta</item>
+        <item>Intento de iniciar workflow secundario</item>
+        <item>La cuenta de usuario está bloqueada</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Error</item>
+        <item>Usuario no registrado</item>
+        <item>Usuario ya inscrito</item>
+    </string-array>
+</resources>
